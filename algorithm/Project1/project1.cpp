@@ -58,7 +58,7 @@ int main(){
                 else{
                     // select a index k from (j,j+i) which can get min value
                     for(int k = j+1; k < j + i; k++){
-                        int value =  dp[j][k] + dp[k][j + i] + get_triangle(j,k,j + i); //the value if we select k as split position
+                        double value =  dp[j][k] + dp[k][j + i] + get_triangle(j,k,j + i); //the value if we select k as split position
                         if(value < dp[j][j + i]){
                             dp[j] [j + i] = value;
                             mark[j][j + i] = k;
