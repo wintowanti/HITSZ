@@ -26,16 +26,10 @@ client.set_access_token(access_token, expires_in)
 #print client.statuses__public_timeline()
 print "-----------------------------------------------"
 print dir(client)
-statuses = client.statuses__user_timeline()['statuses']
-print statuses
-length = len(statuses)
-#输出了部分信息
-for i in range(0,length):
-	print u'昵称：'+statuses[i]['user']['screen_name']
-	print u'简介：'+statuses[i]['user']['description']
-	print u'位置：'+statuses[i]['user']['location']
-	print u'微博：'+statuses[i]['text']
-
+dic = client.statuses.home_timeline.get()
+statuses = dic["statuses"]
+for item in statuses:
+    print item.text
 '''
 #获取授权用户及其关注好友的微博信息并写入mongo数据库
 pagenum=1#微博API返回的微博数据是分页形式的，在API中通过设置页码来读取数据
