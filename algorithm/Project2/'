@@ -1,0 +1,36 @@
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+using namespace std;
+
+//define complex struct 
+struct C{
+    //real and image part
+    double real,image;
+    // constructor
+    C(double _real,double _image){ real = _real; image = _image; }
+    //overload operator sign +
+    C friend operator + (const C c1,const C c2){
+        return C(c1.real + c2.real,c1.image + c2.image);
+    }
+
+    //overload operator sign -
+    C friend operator - (const C c1,const C c2){
+        return C(c1.real - c2.real,c1.image - c2.image);
+    }
+
+    //overload operator sign *
+    C friend operator * (const C c1,const C c2){
+        return C(c1.real * c2.real - c1.image * c2.image,c1.real * c2.image + c1.image * c2.real);
+    }
+
+    //debug for C
+    void debug(){
+        puts("---------------------------------------------------------");
+        cout<<"real: "<<real<<" image: "<<image<<endl;
+        puts("---------------------------------------------------------");
+    }
+};
+int main(){
+    
+}
