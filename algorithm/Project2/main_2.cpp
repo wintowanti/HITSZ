@@ -62,60 +62,64 @@ public:
         ci << "good" <<endl;
     }
     // get FFT
-    vector<C> get_FFT(){
-        // reverse to bit get correct index
-        reverse();
-        // i for length of each segment
-        for(int i = 2; i <= Wx.size(); i = i * 2){
-
-            C wc = C( cos(2*PI/(i*2.0)) , sin(2*PI/(i*1.0)));
-            // j for start index
-            for(int j = 0; j < Wx.size(); j += i){
-                C w = C(1.0,0);
-                // use k to traverse current segment
-                // only traverse half of segment
-                for(int k = j; k - j < i/2; k++){
-                    C tmp1 = Wx[k];
-                    C tmp2 = w * Wx[k + (i/2)] ;
-                    Wx[k] = tmp1 + tmp2;
-                    Wx[k + (i/2)] = tmp1 - tmp2;
-                    w = w * wc;
-                }
+    vector<C> get_FFT(vector<C> vc){ 
+        if(vc.size() == 1) return vc;
+        vector<C> v0;
+        vector<C> v1;
+        v0.clear();
+        v1.clear();
+        for(int i = 0; i < vc.size(); i++){
+            if(i&1){
+                v1.push_back(vc[i]);
+            }
+            else{
+                v0.push_back(vc[i]);
             }
         }
-        return Wx;
+        v0 = get_FFT(v0);
+        v1 = get_FFT(v1);
+        double angle = - 2*PI / (vc.size()*1.0);
+        C wn = C(cos(angle),sin(angle));
+        C w = C(1.0,0);
+        for(int i = 0; i < vc.size() / 2; i++){
+            C tmp1 = v0[i];
+            C tmp2 = w * v1[i];
+            vc[i] = tmp1 + tmp2;
+            vc[i + (vc.size()/2)] = tmp1 - tmp2;
+            w = w * wn;
+        }
+        return vc;
+    }
+    vector< C > work(){
+        return get_FFT(Wx);
     }
 private:
     //get bit reverse
-    vector<int> get_bit_reverse(vector<int> v1){
-        if(v1.size() == 2) return v1;
-        vector<int> v_0;
-        v_0.clear();
-        vector<int> v_1;
-        v_1.clear();
-        for(int i = 0; i < v1.size(); i++){
-            if(i&1) v_1.push_back(v1[i]);
-            else v_0.push_back(v1[i]);
-        }
-        v_0 = get_bit_reverse(v_0);
-        v_1 = get_bit_reverse(v_1);
-        v1.clear();
-        for(int i = 0; i < v_0.size(); i++) v1.push_back(v_0[i]);
-        for(int i = 0; i < v_1.size(); i++) v1.push_back(v_1[i]);
-        return v1;
+    int get_bit_reverse(int dex,int size){
+       int i = 0; 
+       int j = size - 1;
+       for(; j > i ; j--, i++){
+            int flagi = 0;
+            int flagj = 0;
+            if(dex&(1<<i)){
+                flagi = 1;
+                dex -= (1<<i);
+            }
+            if(dex&(1<<j)){
+                flagj = 1;
+                dex -= (1<<j);
+            }
+            if(flagi) dex += (1<<j);
+            if(flagj) dex += (1<<i);
+       }
+       return dex;
     }
     // reverse index
     void reverse(){
-        vector<int> v1;
-        v1.clear();
-        puts("good");
-        for(int i = 0; i < Wx.size(); i++) v1.push_back(i);
-        v1 = get_bit_reverse(v1);
-        for(int i = 0; i < v1.size() / 2; i++){
-            cout<<v1[i]<<endl;
-            swap(Wx[i],Wx[ v1[i] ]);
+        for(int i = 0; i < Wx.size() /2; i++){
+            int dex = get_bit_reverse(i, log_num);
+            swap(Wx[i],Wx[dex]);
         }
-        puts("bad");
     }
 };
 //get data input use ifstream
@@ -124,13 +128,11 @@ vector<double> get_input(string filepath,int size){
     fs.open(filepath.c_str(),fstream::in);
     vector<double> input;
     input.clear();
-    int count = 0;
     for(int i = 0; i < size; i++){
-        int tmp; 
+        double tmp;
         fs>>tmp;
         input.push_back(tmp);
     }
-    cout<<"cout : "<<input.size()<<endl;
     fs.close();
     return input;
 }
@@ -145,19 +147,19 @@ void write_file(vector<C> ans){
 void solve(string inputpath,int size){
     vector<double> input = get_input(inputpath,size);
     FFT test = FFT(input);
-    vector<C> ans = test.get_FFT();
+    vector<C> ans = test.work();
     write_file(ans);
 }
 int main(){
-    cout<<PI<<endl;
-    output_f.open("output.txt",fstream::out);
-   // solve("./Project_2_test/4.txt");
-   // solve("./Project_2_test/8.txt");
-   // solve("./Project_2_test/16.txt");
+    output_f.open("output2.txt",fstream::out);
+    solve("./Project_2_test/4.txt",4);
+    solve("./Project_2_test/8.txt",8);
+    solve("./Project_2_test/16.txt",16);
     solve("./Project_2_test/32.txt",32);
-   // solve("./Project_2_test/64.txt");
-    //solve("./Project_2_test/128.txt");
- //   solve("./Project_2_test/256.txt",256);
+    solve("./Project_2_test/64.txt",64);
+    solve("./Project_2_test/128.txt",128);
+    solve("./Project_2_test/256.txt",256);
+    cout<<"open output2.txt see the result"<<endl;
     output_f.close();
     return 0;
 }
