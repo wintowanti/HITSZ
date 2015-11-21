@@ -38,14 +38,15 @@ struct Items{
         return ans;
     }
     void debug(){
-        cout<<"\n----------------------------------------"<<endl;
+        cout<<"( ";
         for(int i = 0; i < data.size(); i++) cout<<data[i]<<" ";
-        cout<<"\n----------------------------------------"<<endl;
+        cout<<")";
     }
 };
 //globe variable
 int data_lib[MAX_K][MAX_K];
 vector< vector<int> > input;
+int flag[MAX_K];
 //initialisze globe variable
 void init(){
     memset(data_lib,0,sizeof(data_lib));
@@ -63,7 +64,7 @@ int items_count(Items items1){
     }
     return ans;
 }
-//get data
+//get input data
 void get_data_lib(){
   for(int i = 0; i < MAX_K; i++) input.clear();
     vector<int> tmp;
@@ -77,10 +78,8 @@ void get_data_lib(){
         tmp.clear(); tmp.push_back(2); tmp.push_back(5);input.push_back(tmp);
         tmp.clear(); tmp.push_back(2); tmp.push_back(3);tmp.push_back(4);input.push_back(tmp);
         tmp.clear(); tmp.push_back(3); tmp.push_back(4);input.push_back(tmp);
-    puts("good");
     for(int i = 0; i < input.size(); i++){
        for(int j = 0; j < input[i].size(); j++){
-           cout<<i <<"  "<<input[i][j]<<endl;
            data_lib[i][input[i][j]] = 1;
        }
     }
@@ -97,23 +96,18 @@ vector<Items> init_k1_item(){
         Items items1 = Items(tmp);
         // only keep items which large than equal to support rate
         if(items_count(items1) >= SUPPORT_RATE * input.size()){
-            cout<< i << " ++ "<<items_count(items1)<<endl;
             ans.push_back(items1);
         }
     }
     return ans;
 }
-// get kn item1
-vector< vector<Items> >get_frequent_items(){
+// get k2 k3 ...kn itemset
+vector< Items >get_frequent_items(){
     vector< vector<Items> > itemset;
+    vector<Items> ans;
+    ans.clear();
     itemset.clear();
     itemset.push_back(init_k1_item());
-
-    for(int i = 0; i < itemset[0].size(); i++){
-        itemset[0][i].debug();
-        cout<<"count: " << items_count(itemset[0][i])<<endl;
-    }
-    puts("*");
     for(int i = 2; i-2 < itemset.size(); i++){
         vector <Items> tmp;
         tmp.clear();
@@ -123,9 +117,8 @@ vector< vector<Items> >get_frequent_items(){
                     if(itemset[i-2][j].is_union(itemset[i-2][k])){
                         Items items_un = itemset[i-2][j]._union(itemset[i-2][k]);
                         if(items_count(items_un) >= SUPPORT_RATE * input.size()){
-                            items_un.debug();
-                            cout<<"count: "<<items_count(items_un)<<endl;
                             tmp.push_back(items_un);
+                            ans.push_back(items_un);
                         }
                     }
                 }
@@ -133,14 +126,57 @@ vector< vector<Items> >get_frequent_items(){
         }
         if(tmp.size() > 0) itemset.push_back(tmp);
     }
-    puts("*");
-    return  itemset;
+    return ans;
 }
-
-int main(){
+//dfs enumerate all rules
+void dfs(Items items1,int level){
+    if(level == items1.data.size()){
+        vector <int> p1; p1.clear();
+        vector <int> p2; p2.clear();
+        for(int i = 0; i < items1.data.size();i++){
+            if(flag[i]) p1.push_back(items1.data[i]);
+            else  p2.push_back(items1.data[i]);
+        }
+        if(p1.size() == items1.data.size() || p1.size() == 0) return ;
+        Items itemsp1 = Items(p1);
+        Items itemsp2 = Items(p2);
+        // show only rules only larger than or euqual to confidencw rate
+        if(items_count(items1) >= items_count(itemsp1) * CONFIDENCE_RATE){
+            itemsp1.debug();
+            cout<<" ===> ";
+            itemsp2.debug();
+            cout<<"  confidence : " <<items_count(items1) * 1.0 / items_count(itemsp1)<<endl;
+        }
+        return ;
+    }
+    flag[level] = 1;
+    dfs(items1,level + 1);
+    flag[level] = 0;
+    dfs(items1,level + 1);
+    return ;
+}
+void get_all_rule(Items items1){
+    memset(flag,0,sizeof(flag));
+    dfs(items1,0);
+}
+void work(){
     get_data_lib();
-    puts("~~");
-    get_frequent_items();
-    puts("mark");
+    vector<Items> vi = get_frequent_items();
+    puts("\n---------------frequent items--------------------");
+    cout<<"frequent items is : "<<endl;
+    for(int i = 0; i < vi.size(); i++){
+       vi[i].debug();
+       cout<<" support : "<<items_count(vi[i]) * 1.0 / input.size()<<endl;
+    }
+    puts("--------------------END--------------------------\n");
+
+    puts("\n---------------rules-----------------------------");
+    for(int i = 0; i < vi.size(); i++){
+        get_all_rule(vi[i]);
+    }
+    puts("--------------------END--------------------------\n");
+}
+int main(){
+    work();
     return 0;
 }

@@ -5,7 +5,8 @@ def read_lines(filename):
     fs = open(filename,"r");
     ans = fs.read();
     fs.close();
-    return ans.split("\r\n");
+    ans = ans.split("\n")[0::]
+    return ans[0:len(ans)-1:]
     
 if __name__ == "__main__":
     pass        

@@ -1,0 +1,343 @@
+
+----------------------------------------
+
+the sum of distance : 99
+
+category  id : 0
+centre: ( 2, 10)
+( 2, 10)
+dis to centre : 0
+
+( 3, 9)
+dis to centre : 2
+
+
+category  id : 1
+centre: ( 5, 8)
+( 8, 4)
+dis to centre : 25
+
+( 5, 8)
+dis to centre : 0
+
+( 7, 5)
+dis to centre : 13
+
+( 6, 4)
+dis to centre : 17
+
+( 4, 9)
+dis to centre : 2
+
+( 7, 3)
+dis to centre : 29
+
+
+category  id : 2
+centre: ( 1, 2)
+( 2, 5)
+dis to centre : 10
+
+( 1, 2)
+dis to centre : 0
+
+( 1, 3)
+dis to centre : 1
+
+
+----------------------------------------
+
+
+----------------------------------------
+
+the sum of distance : 46.6667
+
+category  id : 0
+centre: ( 2.5, 9.5)
+( 2, 10)
+dis to centre : 0.5
+
+( 3, 9)
+dis to centre : 0.5
+
+
+category  id : 1
+centre: ( 6.16667, 5.5)
+( 8, 4)
+dis to centre : 5.61111
+
+( 5, 8)
+dis to centre : 7.61111
+
+( 7, 5)
+dis to centre : 0.944444
+
+( 6, 4)
+dis to centre : 2.27778
+
+( 4, 9)
+dis to centre : 16.9444
+
+( 7, 3)
+dis to centre : 6.94444
+
+
+category  id : 2
+centre: ( 1.33333, 3.33333)
+( 2, 5)
+dis to centre : 3.22222
+
+( 1, 2)
+dis to centre : 1.88889
+
+( 1, 3)
+dis to centre : 0.222222
+
+
+----------------------------------------
+
+
+----------------------------------------
+
+the sum of distance : 28
+
+category  id : 0
+centre: ( 3, 9.33333)
+( 2, 10)
+dis to centre : 1.44444
+
+( 4, 9)
+dis to centre : 1.11111
+
+( 3, 9)
+dis to centre : 0.111111
+
+
+category  id : 1
+centre: ( 6.6, 4.8)
+( 8, 4)
+dis to centre : 2.6
+
+( 5, 8)
+dis to centre : 12.8
+
+( 7, 5)
+dis to centre : 0.2
+
+( 6, 4)
+dis to centre : 1
+
+( 7, 3)
+dis to centre : 3.4
+
+
+category  id : 2
+centre: ( 1.33333, 3.33333)
+( 2, 5)
+dis to centre : 3.22222
+
+( 1, 2)
+dis to centre : 1.88889
+
+( 1, 3)
+dis to centre : 0.222222
+
+
+----------------------------------------
+
+
+----------------------------------------
+
+the sum of distance : 16.3333
+
+category  id : 0
+centre: ( 3.5, 9)
+( 2, 10)
+dis to centre : 3.25
+
+( 5, 8)
+dis to centre : 3.25
+
+( 4, 9)
+dis to centre : 0.25
+
+( 3, 9)
+dis to centre : 0.25
+
+
+category  id : 1
+centre: ( 7, 4)
+( 8, 4)
+dis to centre : 1
+
+( 7, 5)
+dis to centre : 1
+
+( 6, 4)
+dis to centre : 1
+
+( 7, 3)
+dis to centre : 1
+
+
+category  id : 2
+centre: ( 1.33333, 3.33333)
+( 2, 5)
+dis to centre : 3.22222
+
+( 1, 2)
+dis to centre : 1.88889
+
+( 1, 3)
+dis to centre : 0.222222
+
+
+----------------------------------------
+
+
+----------------------------------------
+
+the sum of distance : 16.3333
+
+category  id : 0
+centre: ( 3.5, 9)
+( 2, 10)
+dis to centre : 3.25
+
+( 5, 8)
+dis to centre : 3.25
+
+( 4, 9)
+dis to centre : 0.25
+
+( 3, 9)
+dis to centre : 0.25
+
+
+category  id : 1
+centre: ( 7, 4)
+( 8, 4)
+dis to centre : 1
+
+( 7, 5)
+dis to centre : 1
+
+( 6, 4)
+dis to centre : 1
+
+( 7, 3)
+dis to centre : 1
+
+
+category  id : 2
+centre: ( 1.33333, 3.33333)
+( 2, 5)
+dis to centre : 3.22222
+
+( 1, 2)
+dis to centre : 1.88889
+
+( 1, 3)
+dis to centre : 0.222222
+
+
+----------------------------------------
+
+
+----------------------------------------
+
+the sum of distance : 16.3333
+
+category  id : 0
+centre: ( 3.5, 9)
+( 2, 10)
+dis to centre : 3.25
+
+( 5, 8)
+dis to centre : 3.25
+
+( 4, 9)
+dis to centre : 0.25
+
+( 3, 9)
+dis to centre : 0.25
+
+
+category  id : 1
+centre: ( 7, 4)
+( 8, 4)
+dis to centre : 1
+
+( 7, 5)
+dis to centre : 1
+
+( 6, 4)
+dis to centre : 1
+
+( 7, 3)
+dis to centre : 1
+
+
+category  id : 2
+centre: ( 1.33333, 3.33333)
+( 2, 5)
+dis to centre : 3.22222
+
+( 1, 2)
+dis to centre : 1.88889
+
+( 1, 3)
+dis to centre : 0.222222
+
+
+----------------------------------------
+
+
+----------------------------------------
+
+the sum of distance : 16.3333
+
+category  id : 0
+centre: ( 3.5, 9)
+( 2, 10)
+dis to centre : 3.25
+
+( 5, 8)
+dis to centre : 3.25
+
+( 4, 9)
+dis to centre : 0.25
+
+( 3, 9)
+dis to centre : 0.25
+
+
+category  id : 1
+centre: ( 7, 4)
+( 8, 4)
+dis to centre : 1
+
+( 7, 5)
+dis to centre : 1
+
+( 6, 4)
+dis to centre : 1
+
+( 7, 3)
+dis to centre : 1
+
+
+category  id : 2
+centre: ( 1.33333, 3.33333)
+( 2, 5)
+dis to centre : 3.22222
+
+( 1, 2)
+dis to centre : 1.88889
+
+( 1, 3)
+dis to centre : 0.222222
+
+
+----------------------------------------
+

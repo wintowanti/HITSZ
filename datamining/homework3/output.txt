@@ -474,7 +474,6 @@ dis to centre : 3.22222
 
 ( 1, 2)
 dis to centre : 1.88889
-
 ( 1, 3)
 dis to centre : 0.222222
 

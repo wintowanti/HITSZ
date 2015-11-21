@@ -40,45 +40,57 @@ class Course_Object(object):
         print "start_time : ",self.start_time
         print "---------------------------------"
 
+    def get_line(self):
+        tmp = []
+        tmp.append(self.cid)
+        tmp.append(self.mid)
+        tmp.append(self.category)
+        tmp.append(" ".join(self.children))
+        tmp.append(self.start_time)
+        return ",".join(tmp) + '\n'
+
 globe_Cdict = {"size":0};
 globe_Mdict = {"size":0};
 globe_Sdict = {"size":0};
 
 def get_ID(Dict,hashstring):
     if hashstring in Dict:
-        return Dict[hashstring]
+        return str(Dict[hashstring])
     else:
         Dict[hashstring] = Dict["size"] + 1
         Dict["size"] = Dict["size"] + 1
-        return Dict[hashstring]
+        return str(Dict[hashstring])
 
 if __name__ == "__main__":
     print "开始"
     path_date = "./data/date.csv"
     lines_date = read_lines(path_date)
     print lines_date
+    for index,item in enumerate(lines_date):
+        print index,item
     tmp = []
     for index,line in enumerate(lines_date[1::]):
         mylist = line.split(",")
         c1 = Course(str(index + 1),mylist[0],mylist[1],mylist[2])
         tmp.append(c1);
-    fs_data = open("data_process.csv","w")
-    fs_data.write("Cid,Hashstring,start_time,end_time"+ "\n")
+    output_data = open("./preprocess/data_process.csv","w")
+    output_data.write("Cid,Hashstring,start_time,end_time"+ "\n")
     for item in tmp:
         item.debug()
     for item in tmp:
         get_ID(globe_Cdict,item.hashstring)
-        fs_data.write(item.get_line())
+        output_data.write(item.get_line())
         print "bug",item.get_line()
-    fs_data.close();
+    output_data.close();
     print "len",len(tmp);
 
     print globe_Cdict
 
     path_object = "./data/object.csv"
     lines_object = read_lines(path_object)
+
     tmp = [];
-    for index,line in enumerate(lines_object[1:10:]):
+    for index,line in enumerate(lines_object[1::]):
         mylist = line.split(",");
         print mylist
         print len(mylist)
@@ -88,7 +100,11 @@ if __name__ == "__main__":
                 children_list.append(get_ID(globe_Mdict,item))
         cb1 = Course_Object(get_ID(globe_Cdict,mylist[0]),get_ID(globe_Mdict,mylist[1]),mylist[2],children_list,mylist[4])
         tmp.append(cb1)
-    #for item in tmp:
-    #    item.debug()
+    output_object = open("./preprocess/object_process.csv","w")
+    output_object.write("Course_id,Module_id,category,children,start_time"+"\n");
+    for item in tmp:
+        item.debug()
+        output_object.write(item.get_line())
+    output_object.close()
         
     print "结素"
