@@ -1,6 +1,6 @@
 # -*- encoding=UTF-8 -*-
 '''
-    配置文件有关各种data的配置文件
+    配置文件有关各种data路径的配置文件
 '''
 
 path_date = "./data/date.csv"
