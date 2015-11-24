@@ -10,6 +10,9 @@ path_object = "./data/object.csv"
 path_train_enrollment = "./data/train/enrollment_train.csv"
 path_train_truth = "./data/train/truth_train.csv"
 path_train_log = "./data/train/log_train.csv"
+path_train_log_process = "./data/train/log_train_process.csv"
+path_train_log_process_s = "./data/train/log_train_process_s.csv"
+path_train_log_s = "./data/train/log_train_s.csv"
 
 #测试数据
 path_test_enrollment = "./data/test/enrollment_test.csv"
