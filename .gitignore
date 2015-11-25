@@ -3,3 +3,7 @@
 *.csv
 *.o
 *.pyc
+*~
+*.swn
+*.swo
+*.swp
