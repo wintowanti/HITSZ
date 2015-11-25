@@ -98,7 +98,8 @@ class Source_Event(object):
     def div(self,se1):
         ans = Source_Event()
         for i in range(9):
-            if(se1.count[i] == 0.0):  ans.count[i] = 0.0
+            if(se1.count[i] == 0.0 and self.count[i] == 0.0):  ans.count[i] = 0.0
+            elif(se1.count[i] == 0.0 and self.count[i] != 0.0): ans.count[i] = 0.5
             else: 
                 ans.count[i] = self.count[i] / se1.count[i]
         return ans
@@ -109,6 +110,7 @@ class Source_Event(object):
             print item," ",
         print "\n"
         spilt_line()
+last_operate_day = {}
 
 if __name__ == "__main__":
     print "开始"
