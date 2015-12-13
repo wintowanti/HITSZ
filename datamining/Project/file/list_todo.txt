@@ -1,0 +1,51 @@
+数据预处理
+train_log 600+MB 太大 内存读入费劲
+
+解决方案：
+1.用数据库存储 然后每次需要数据，往数据库里面取
+2.对数据进行预处理，删除无用项目， 映射
+
+	1.观测train_log 发现object fields是无用项，直接删除
+	2.source 和 event 项取值挺少的，可以直接映射成数字
+	映射规则：
+	source(共两项)：browers -> 0
+			server -> 1
+	event（共七项）:
+		access -> 0
+		page_close ->1
+		problem -> 2
+		video -> 3
+		discussion -> 4
+		navigate -> 5
+		wiki -> 6
+
+	遍历log 发现 source-event 共有9种组合
+	browser-access 
+	browser-page_close 
+	browser-problem    
+	browser-video       
+	server-access
+	server-discussion   
+	server-navigate     
+	server-problem      
+	server-wiki     
+
+	数据处理后发现 600MB -> 200MB
+	
+	
+
+feature 提取
+用户在该课程的操作数量（按event_source序对统计），enrollment最后一周、倒数第二周、第一周、总体，占该用户在所有课程的比例，占该课程所有用户的比例 (108)
+用户有行为的课程数量，用户行为的最后一周、倒数第二周、第一周、总体 (4)
+browser-access      v  v
+browser-page_close  v  v
+browser-problem     v  v
+browser-video          v
+server-access
+server-discussion   v  v
+server-navigate     v  v
+server-problem      v  v  v
+server-wiki         v  v  v  v
+(4 * 9 * 3 = 108 维度向量)
+
+
